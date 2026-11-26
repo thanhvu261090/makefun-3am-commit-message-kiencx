@@ -13,8 +13,7 @@ LIMIT = 139
 OUT = "/output/entry.txt"
 
 
-def main():
-    line = ENTRY
+def validate(line):
     if not line.strip():
         raise SystemExit("empty entry")
     if line != line.strip():
@@ -23,6 +22,11 @@ def main():
         raise SystemExit("entry must be one line")
     if len(line) > LIMIT:
         raise SystemExit("entry is %d chars, limit is %d" % (len(line), LIMIT))
+
+
+def main():
+    line = ENTRY
+    validate(line)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as handle:
         handle.write(line)
